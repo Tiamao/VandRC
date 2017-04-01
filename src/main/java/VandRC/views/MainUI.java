@@ -9,9 +9,6 @@ import com.vaadin.spring.annotation.SpringViewDisplay;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
-/**
- * Created by Kamil on 01.04.2017.
- */
 @Theme("valo")
 @SpringUI
 @SpringViewDisplay
