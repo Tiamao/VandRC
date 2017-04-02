@@ -8,16 +8,16 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * Created by Kamil on 01.04.2017.
+ * Created by Kamil on 02.04.2017.
  */
 @Repository
 @Transactional
-public class CityDao {
-
+public class CustomerDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<City> getAll() {
-        return entityManager.createQuery("from City").getResultList();
+    public List<Customer> getAll() {
+        return entityManager.createQuery("from Customer").getResultList();
     }
+
 }

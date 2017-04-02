@@ -1,7 +1,7 @@
 package VandRC.controllers;
 
-import VandRC.models.City;
-import VandRC.models.CityDao;
+import VandRC.models.Customer;
+import VandRC.models.CustomerDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
- * Created by Kamil on 01.04.2017.
+ * Created by Kamil on 02.04.2017.
  */
 @Controller
-public class CityController {
+public class CustomerController {
 
     @Autowired
-    CityDao cityDao;
+    CustomerDao customerDao;
 
-    @RequestMapping(value="/cities", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value="/customers", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public List<City> getAll() {
-        return cityDao.getAll();
+    public List<Customer> getAll() {
+        return customerDao.getAll();
     }
 }
