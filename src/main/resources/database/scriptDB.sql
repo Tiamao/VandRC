@@ -1,6 +1,6 @@
-CREATE DATABASE vandrc
+CREATE DATABASE vandrc;
 
-USE vandrc
+USE vandrc;
 
 CREATE TABLE customers(
 customerID int NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -45,8 +45,26 @@ statusID int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 description varchar(30)
 );
 
+CREATE TABLE gallery(
+galleryID int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+title varchar(30),
+photoPath varchar(255)
+);
+
+CREATE TABLE products(
+productID int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+galleryID int,
+description text,
+workerID int,
+modificationDate date,
+warnings text,
+FOREIGN KEY (galleryID) REFERENCES gallery(galleryID),
+FOREIGN KEY (workerID) REFERENCES workers(workerID)
+);
+
 CREATE TABLE orders(
 orderID int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+productID int,
 workerID int,
 customerID int,
 inDate date,
@@ -55,14 +73,14 @@ statusID int,
 price decimal,
 size int,
 sizeType varchar(45),
-description varchar(255),
+description text,
 phoneNumber varchar(15),
 discount double,
 FOREIGN KEY (workerID) REFERENCES workers(workerID),
 FOREIGN KEY (customerID) REFERENCES customers(customerID),
-FOREIGN KEY (statusID) REFERENCES statuses(statusID)
+FOREIGN KEY (statusID) REFERENCES statuses(statusID),
+FOREIGN KEY (productID) REFERENCES products(productID)
 );
-
 
 CREATE TABLE toolsInOrder(
 tioID int NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -78,4 +96,12 @@ orderID int,
 allergenID int,
 FOREIGN KEY (allergenID) REFERENCES allergens(allergenID),
 FOREIGN KEY (orderID) REFERENCES orders(orderID)
+);
+
+CREATE TABLE allergensInProduct(
+aimID int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+productID int,
+allergenID int,
+FOREIGN KEY (allergenID) REFERENCES allergens(allergenID),
+FOREIGN KEY (productID) REFERENCES products(productID)
 );
