@@ -14,6 +14,7 @@ public class GalleryItem {
     private int galleryID;
     private String title;
     private String photoPath;
+    private boolean status;
 
     public GalleryItem() {
     }
@@ -45,5 +46,13 @@ public class GalleryItem {
 
     public void setPhotoPath(String photoPath) {
         this.photoPath = photoPath;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

@@ -48,7 +48,8 @@ description varchar(30)
 CREATE TABLE gallery(
 galleryID int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 title varchar(30),
-photoPath varchar(255)
+photoPath varchar(255),
+status boolean
 );
 
 CREATE TABLE products(
