@@ -1,7 +1,7 @@
 package VandRC.views.galleryview;
 
-import VandRC.controllers.GalleryController;
-import VandRC.models.Gallery;
+import VandRC.controllers.GalleryItemController;
+import VandRC.models.GalleryItem;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.ExternalResource;
@@ -23,10 +23,10 @@ public class GalleryView extends VerticalLayout implements View {
     private Image image;
     @PostConstruct
     void init() {
-        GalleryController controller = new GalleryController();
-        List<Gallery> galleryList = controller.getAll();
+        GalleryItemController controller = new GalleryItemController();
+        List<GalleryItem> galleryItemList = controller.getAll();
 
-        galleryList.forEach( g->{
+        galleryItemList.forEach(g->{
             image = new Image(g.getTitle());
             image.setSource(new ExternalResource(g.getPhotoPath()));
             addComponent(image);

@@ -1,7 +1,7 @@
 package VandRC.controllers;
 
-import VandRC.models.Gallery;
-import VandRC.models.GalleryDao;
+import VandRC.models.GalleryItem;
+import VandRC.models.GalleryItemDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -15,14 +15,14 @@ import java.util.List;
  * Created by Mikołaj on 27.04.2017.
  */
 @Controller
-public class GalleryController {
+public class GalleryItemController {
 
     @Autowired
-    private GalleryDao galleryDao;
+    private GalleryItemDao galleryItemDao;
 
     @RequestMapping(value="/photos", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public List<Gallery> getAll() {
-        return galleryDao.getAll();
+    public List<GalleryItem> getAll() {
+        return galleryItemDao.getAll();
     }
 }

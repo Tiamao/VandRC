@@ -19,7 +19,7 @@ public class ProductDao {
 
     public String getImagePath(int productID){
         Product product = (Product) entityManager.createQuery("from Product where productID = :productID").setParameter("productID", productID).getSingleResult();
-        return entityManager.find(Gallery.class, product.getGalleryID()).getPhotoPath();
+        return entityManager.find(GalleryItem.class, product.getGalleryID()).getPhotoPath();
     }
 
     public List<Product> getAll() {
@@ -28,6 +28,6 @@ public class ProductDao {
 
     public String getTitle(int productID) {
         Product product = (Product) entityManager.createQuery("from Product where productID = :productID").setParameter("productID", productID).getSingleResult();
-        return entityManager.find(Gallery.class, product.getGalleryID()).getTitle();
+        return entityManager.find(GalleryItem.class, product.getGalleryID()).getTitle();
     }
 }

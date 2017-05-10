@@ -21,4 +21,8 @@ public class AllergenDao {
         return entityManager.createQuery("from Allergen").getResultList();
     }
 
+    public List<Allergen> getProducktAllergens(Product product){
+        return entityManager.createQuery("").getResultList();
+    }
+
 }

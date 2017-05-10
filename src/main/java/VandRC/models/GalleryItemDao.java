@@ -12,12 +12,12 @@ import java.util.List;
  */
 @Repository
 @Transactional
-public class GalleryDao {
+public class GalleryItemDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Gallery> getAll() {
+    public List<GalleryItem> getAll() {
         return entityManager.createQuery("from Gallery").getResultList();
     }
 }

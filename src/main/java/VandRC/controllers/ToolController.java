@@ -1,10 +1,9 @@
 package VandRC.controllers;
 
-import VandRC.models.City;
-import VandRC.models.CityDao;
+import VandRC.models.Tool;
+import VandRC.models.ToolDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,17 +11,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
- * Created by Kamil on 01.04.2017.
+ * Created by Kamil on 10.05.2017.
  */
-@Controller
-public class CityController {
-
+public class ToolController {
     @Autowired
-    CityDao cityDao;
+    private ToolDao toolDao;
 
-    @RequestMapping(value="/cities", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value="/tools", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public List<City> getAll() {
-        return cityDao.getAll();
+    public List<Tool> getAll() {
+        return toolDao.getAll();
     }
 }

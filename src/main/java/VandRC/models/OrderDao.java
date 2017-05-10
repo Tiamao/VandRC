@@ -20,4 +20,17 @@ public class OrderDao {
     public List<Order> getAll() {
         return entityManager.createQuery("from Order").getResultList();
     }
+
+    public void makePredefinitedOrder(Product product){
+
+    }
+
+    public void makeOwnOrder(Order order){
+
+    }
+
+    public List<Order> getOrdersOnDay(){
+        return entityManager.createQuery("").getResultList();
+    }
+
 }

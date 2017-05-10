@@ -20,4 +20,8 @@ public class TagDao {
     public List<Tag> getAll() {
         return entityManager.createQuery("from Tag").getResultList();
     }
+
+    public List<Tag> getToolTags(Tool tool){
+        return entityManager.createQuery("").getResultList();
+    }
 }

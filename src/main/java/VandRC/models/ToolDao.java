@@ -14,7 +14,6 @@ import java.util.List;
 @Transactional
 public class ToolDao {
 
-
     @PersistenceContext
     private EntityManager entityManager;
 
