@@ -13,6 +13,7 @@ public class Allergen {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int allergenID;
     private String name;
+    private boolean status;
 
     public Allergen() {
     }
@@ -35,5 +36,13 @@ public class Allergen {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

@@ -26,24 +26,10 @@ public class Order {
     private int size;
     private String sizeType;
     private String description;
-    private String allergenDescription;
     private String phoneNumber;
+    private double discount;
 
     public Order() {
-    }
-
-    public Order(int workerID, int customerID, Date inDate, Date outDate, String status, double price, int size, String sizeType, String description, String allergenDescription, String phoneNumber) {
-        this.workerID = workerID;
-        this.customerID = customerID;
-        this.inDate = inDate;
-        this.outDate = outDate;
-        this.status = status;
-        this.price = price;
-        this.size = size;
-        this.sizeType = sizeType;
-        this.description = description;
-        this.allergenDescription = allergenDescription;
-        this.phoneNumber = phoneNumber;
     }
 
     public int getOrderID() {
@@ -126,19 +112,19 @@ public class Order {
         this.description = description;
     }
 
-    public String getAllergenDescription() {
-        return allergenDescription;
-    }
-
-    public void setAllergenDescription(String allergenDescription) {
-        this.allergenDescription = allergenDescription;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 }

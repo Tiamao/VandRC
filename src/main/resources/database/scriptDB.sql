@@ -58,6 +58,7 @@ description text,
 workerID int,
 modificationDate date,
 warnings text,
+status boolean,
 FOREIGN KEY (galleryID) REFERENCES gallery(galleryID),
 FOREIGN KEY (workerID) REFERENCES workers(workerID)
 );

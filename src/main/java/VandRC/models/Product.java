@@ -18,6 +18,7 @@ public class Product {
     private int workerID;
     private Date dateModification;
     private String warnings;
+    private boolean status;
 
     public Product() {
     }
@@ -77,5 +78,13 @@ public class Product {
 
     public void setWarnings(String warnings) {
         this.warnings = warnings;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }
