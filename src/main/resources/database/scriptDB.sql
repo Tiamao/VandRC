@@ -26,6 +26,11 @@ name varchar(45),
 status boolean
 );
 
+CREATE TABLE tags(
+tagID int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+tagName varchar(45)
+);
+
 CREATE TABLE tools(
 toolID int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 name varchar(45),
@@ -33,11 +38,12 @@ path varchar(200),
 status boolean
 );
 
-CREATE TABLE tags(
-tagID int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE toolsWithTags(
+toolsWithTagsID int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 toolID int,
-tagName varchar(45),
-FOREIGN KEY (toolID) REFERENCES tools(toolID)
+tagID int,
+FOREIGN KEY (toolID) REFERENCES tools(toolID),
+FOREIGN KEY (tagID) REFERENCES tags(tagID)
 );
 
 CREATE TABLE statuses(
@@ -57,8 +63,7 @@ productID int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 galleryID int,
 description text,
 workerID int,
-modificationDate date,
-warnings text,
+modificationDate TIMESTAMP ,
 status boolean,
 FOREIGN KEY (galleryID) REFERENCES gallery(galleryID),
 FOREIGN KEY (workerID) REFERENCES workers(workerID)
@@ -69,13 +74,14 @@ orderID int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 productID int,
 workerID int,
 customerID int,
-inDate date,
-outDate date,
+inDate timestamp,
+outDate timestamp,
 statusID int,
 price decimal,
 size int,
 sizeType varchar(45),
 description text,
+warnings text,
 phoneNumber varchar(15),
 discount double,
 FOREIGN KEY (workerID) REFERENCES workers(workerID),

@@ -1,38 +1,33 @@
 package VandRC.views;
 
-import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.spring.annotation.SpringView;
-import com.vaadin.ui.Button;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
-
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 
 /**
  * Created by Kamil on 01.04.2017.
  */
-@SpringView(name = RegisterView.VIEW_NAME)
-public class RegisterView extends VerticalLayout implements View {
 
-    public static final String VIEW_NAME = "register";
+public class RegisterView extends VerticalLayout{
 
-    @Inject
-    private MainUI myui;
 
-    private Button test;
+    private TextField name;
+    private TextField surname;
+    private TextField mail;
+    private TextField password;
+    private TextField repeatPassword;
 
-    @PostConstruct
-    void init() {
-        test = new Button("asdasd");
-        test.addClickListener( e-> {
-            myui.headerLayout.setVisible(true);
-        });
-        addComponent(test);
-    }
+    RegisterView() {
+        setSizeFull();
+        setSpacing(true);
 
-    @Override
-    public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
+        name = new TextField();
+        surname = new TextField();
+        mail = new TextField();
+        password = new TextField();
+        repeatPassword = new TextField();
 
+        addComponents(name, surname,mail,password,repeatPassword);
+        setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
     }
 }
