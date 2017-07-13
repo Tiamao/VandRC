@@ -12,12 +12,16 @@ import java.util.List;
  */
 @Repository
 @Transactional
-public class GalleryItemDao {
+public class GalleryDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<GalleryItem> getAll() {
+    public List<Gallery> getAll() {
         return entityManager.createQuery("from Gallery").getResultList();
+    }
+
+    public Gallery getItemByID(int id) {
+        return (Gallery) entityManager.createQuery("from Gallery where galleryID =:id").setParameter("id", id).getSingleResult();
     }
 }

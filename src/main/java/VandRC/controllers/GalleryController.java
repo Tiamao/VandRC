@@ -1,10 +1,11 @@
 package VandRC.controllers;
 
-import VandRC.models.GalleryItem;
-import VandRC.models.GalleryItemDao;
+import VandRC.models.Gallery;
+import VandRC.models.GalleryDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,14 +16,22 @@ import java.util.List;
  * Created by Mikołaj on 27.04.2017.
  */
 @Controller
-public class GalleryItemController {
+public class GalleryController {
 
     @Autowired
-    private GalleryItemDao galleryItemDao;
+    private GalleryDao galleryDao;
 
     @RequestMapping(value="/photos", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public List<GalleryItem> getAll() {
-        return galleryItemDao.getAll();
+    public List<Gallery> getAll() {
+        return galleryDao.getAll();
     }
+
+    @RequestMapping(value="/json/photos/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public Gallery getItemByID(@PathVariable("id") int id) {
+        return galleryDao.getItemByID(id);
+    }
+
+
 }

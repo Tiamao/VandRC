@@ -12,15 +12,9 @@ public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int tagID;
-    private int toolID;
     private String tagName;
 
     public Tag() {
-    }
-
-    public Tag(int toolID, String tagName) {
-        this.toolID = toolID;
-        this.tagName = tagName;
     }
 
     public int getTagID() {
@@ -29,14 +23,6 @@ public class Tag {
 
     public void setTagID(int tagID) {
         this.tagID = tagID;
-    }
-
-    public int getToolID() {
-        return toolID;
-    }
-
-    public void setToolID(int toolID) {
-        this.toolID = toolID;
     }
 
     public String getTagName() {

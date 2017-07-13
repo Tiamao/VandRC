@@ -25,4 +25,7 @@ public class AllergenDao {
         return entityManager.createQuery("").getResultList();
     }
 
+    public Allergen getAllergenByID(int id) {
+        return (Allergen) entityManager.createQuery("from Allergen where allergenID =:id").setParameter("id", id).getSingleResult();
+    }
 }

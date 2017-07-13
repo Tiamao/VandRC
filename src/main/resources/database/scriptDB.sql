@@ -53,8 +53,8 @@ description varchar(30)
 
 CREATE TABLE gallery(
 galleryID int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-title varchar(30),
-photoPath varchar(255),
+title text,
+photoPath text,
 status boolean
 );
 
@@ -107,7 +107,7 @@ FOREIGN KEY (orderID) REFERENCES orders(orderID)
 );
 
 CREATE TABLE allergensInProduct(
-aimID int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+aipID int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 productID int,
 allergenID int,
 FOREIGN KEY (allergenID) REFERENCES allergens(allergenID),

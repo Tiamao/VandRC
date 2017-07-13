@@ -16,26 +16,34 @@ public class DefaultView extends VerticalLayout implements View {
     public static final String VIEW_NAME = "";
     private VerticalLayout layout;
 
-    private String path = "https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe_images/recipe-image-legacy-id--1960_11.jpg?itok=U2w8rr7o";
-    private String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ante risus," +
-            " consectetur scelerisque ipsum sit amet, luctus dictum enim. Nullam cursus suscipit porttitor." +
-            " Maecenas ultricies tincidunt porta. Curabitur sagittis diam vitae suscipit finibus. " +
-            "Aliquam et nunc eget erat commodo tempor et non lacus. Sed feugiat, tortor sed dapibus sodales, " +
-            "tellus erat maximus metus, sed pharetra sapien dolor elementum sapien. Sed semper venenatis fermentum. " +
-            "Praesent ut ullamcorper tortor. Proin mattis id tellus non pharetra. Suspendisse ipsum nisi," +
-            " aliquet gravida lobortis id, facilisis id turpis. Cras ullamcorper nisl ut nisl pharetra suscipit. " +
-            "Interdum et malesuada fames ac ante ipsum primis in faucibus.";
+    private String path = "https://i2.wp.com/vanillaandraspberrycakes.com/wp-content/uploads/2016/09/31.jpg";
+
 
     @PostConstruct
     void init() {
         layout = new VerticalLayout();
-        layout.setSizeFull();
+        layout.setWidth(60, Unit.PERCENTAGE);
+        SectionLayout sl = new SectionLayout(path, true);
+        sl.setStyleName("defaultPageContent_design1");
+        SectionLayout sl1 = new SectionLayout(path, false);
+        sl1.setStyleName("defaultPageContent_design2");
+        SectionLayout sl2 = new SectionLayout(path, true);
+        sl2.setStyleName("defaultPageContent_design1");
+        sl.setWidth(85, Unit.PERCENTAGE);
+        sl.setHeight(sl.getWidth(), Unit.PERCENTAGE);
+        sl1.setWidth(85, Unit.PERCENTAGE);
+        sl1.setHeight(sl.getWidth(), Unit.PERCENTAGE);
 
-        layout.addComponent(new SectionLayout(loremIpsum, path, true));
-        layout.addComponent(new SectionLayout(loremIpsum, path, false));
-        layout.addComponent(new SectionLayout(loremIpsum, path, true));
+        sl2.setWidth(85, Unit.PERCENTAGE);
+        sl2.setHeight(sl.getWidth(), Unit.PERCENTAGE);
 
-        layout.setWidth(80, Unit.PERCENTAGE);
+        layout.addComponent(sl);
+        layout.addComponent(sl1);
+        layout.addComponent(sl2);
+
+        layout.setComponentAlignment(sl, Alignment.MIDDLE_CENTER);
+        layout.setComponentAlignment(sl1, Alignment.MIDDLE_CENTER);
+        layout.setComponentAlignment(sl2, Alignment.MIDDLE_CENTER);
 
         addComponent(layout);
         setComponentAlignment(layout, Alignment.MIDDLE_CENTER);

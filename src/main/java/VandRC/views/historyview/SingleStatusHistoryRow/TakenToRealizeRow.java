@@ -1,17 +1,17 @@
-package VandRC.views.historyview;
+package VandRC.views.historyview.SingleStatusHistoryRow;
 
-import VandRC.controllers.AllergenController;
-import VandRC.controllers.CustomerController;
-import VandRC.controllers.OrderController;
 import VandRC.models.Order;
-import VandRC.views.makeOrder.MakePredefinitedOrder;
+import VandRC.views.historyview.HistoryView;
+import com.vaadin.server.Sizeable;
 import com.vaadin.ui.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-public class SingleHistoryRow extends HorizontalLayout {
-
+/**
+ * Created by Adam on 06.07.2017.
+ */
+public class TakenToRealizeRow extends HorizontalLayout{
     private Label titleValue;
     private Label statusTitle;
     private Label statusValue;
@@ -25,9 +25,9 @@ public class SingleHistoryRow extends HorizontalLayout {
     private Label sizeValue;
     private Label priceTitle;
     private Label priceValue;
-    private Button orderAgain;
+    private Button cancel;
 
-    SingleHistoryRow(Order order, String status, HistoryView historyView, AllergenController allergenController, OrderController orderController, CustomerController customerController){
+    public TakenToRealizeRow(Order order, String status, HistoryView historyView){
         setSpacing(true);
         addStyleName("layout-with-border");
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -65,30 +65,13 @@ public class SingleHistoryRow extends HorizontalLayout {
         priceValue = new Label(String.valueOf(order.getPrice()));
         priceValue.setStyleName("standardtext_design");
 
-        orderAgain = new Button("Zamów ponownie");
-        orderAgain.addStyleName("orderbtn_design");
-
-
-        orderAgain.addClickListener(orderAgain->{
-            Window window = new Window();
-            window.setWidth(60, Unit.PERCENTAGE);
-
-            window.setContent(new MakePredefinitedOrder(order, allergenController, orderController,customerController));
-
-            window.setHeight(80, Unit.PERCENTAGE);
-
-            window.center();
-            window.setDraggable(false);
-            window.setModal(true);
-            window.setResizable(false);
-            window.setClosable(true);
-            getUI().getUI().addWindow(window);
-        });
+        cancel = new Button("Anuluj");
+        cancel.addStyleName("orderbtn_design");
 
         GridLayout gridLayout = new GridLayout(3,5);
         gridLayout.setSpacing(true);
         gridLayout.setSizeFull();
-        gridLayout.setWidth(100, Unit.PERCENTAGE);
+        gridLayout.setWidth(100, Sizeable.Unit.PERCENTAGE);
 
         gridLayout.addComponent(titleValue, 0,0);
         gridLayout.addComponent(new HorizontalLayout(statusTitle, statusValue), 2,0);
@@ -98,8 +81,14 @@ public class SingleHistoryRow extends HorizontalLayout {
         gridLayout.addComponent(new VerticalLayout(outDateTitle, outDateValue), 2,3);
         gridLayout.addComponent(new HorizontalLayout(sizeTitle, sizeValue), 0, 4);
         gridLayout.addComponent(new HorizontalLayout(priceTitle, priceValue), 1, 4);
-        gridLayout.addComponent(orderAgain, 2, 4);
-        gridLayout.setComponentAlignment(orderAgain,Alignment.MIDDLE_RIGHT);
+        gridLayout.addComponent(cancel, 2, 4);
+        gridLayout.setComponentAlignment(cancel,Alignment.MIDDLE_RIGHT);
+
+        cancel.addClickListener(cancel->{
+            order.setStatusID(3);
+            historyView.updateOrderStatus(order);
+            getUI().getNavigator().navigateTo(HistoryView.VIEW_NAME);
+        });
 
         addComponent(gridLayout);
     }

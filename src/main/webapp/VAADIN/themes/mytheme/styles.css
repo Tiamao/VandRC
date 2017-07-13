@@ -12971,3 +12971,198 @@ div.v-layout.v-horizontal.v-widget {
 .mytheme .color {
 	color: blue;
 }
+
+.mytheme .layout-with-border {
+	border: 2px solid #fcebeb;
+}
+
+.mytheme .text-align-right {
+	text-align: right;
+	margin-right: 20px;
+}
+
+.mytheme .grey-background {
+	background-color: #f0f0f0;
+}
+
+.mytheme .text-align-center {
+	text-align: center;
+}
+
+.mytheme .header_design {
+	background-color: #006e51;
+	height: 190px;
+}
+
+.mytheme .helloLabel_design {
+	color: white;
+	text-align: center;
+}
+
+.mytheme .logo_design {
+	height: 180px;
+	top: 5px !important;
+	bottom: 5px;
+	position: relative !important;
+}
+
+.mytheme .textfield_design {
+	margin: 10px;
+	width: 250px;
+}
+
+.mytheme .textfieldERROR_design {
+	margin: 10px;
+	width: 250px;
+	border: 2px solid darkred;
+}
+
+.mytheme .loginbtns_design {
+	margin: 10px;
+	border: 2px solid #fcebeb;
+	background: white;
+	color: #006e51;
+	font-weight: bold;
+	font-size: larger;
+}
+
+.mytheme .loginbtn_design {
+	margin: 10px;
+	border: 2px solid #fcebeb;
+	background: #fcebeb;
+	color: #006e51;
+	font-weight: bold;
+	font-size: larger;
+}
+
+.mytheme .registrybtn_design {
+	margin: 10px;
+	border: 2px solid white;
+	background: white;
+	color: #006e51;
+	font-weight: normal;
+	font-size: larger;
+}
+
+.mytheme .menustackbar_design {
+	box-shadow: inset 0 1px 0 white, inset 0 -1px 0 #f1f0f0, 0 2px 3px rgba(0, 0, 0, 0.05);
+	border: 1px solid #ffffff;
+	text-align: center;
+	background: white;
+}
+
+.mytheme .productTitle_design {
+	font-size: xx-large;
+	font-weight: bold;
+}
+
+.mytheme .orderbtn_design {
+	border: 2px solid #fcebeb;
+	background: white;
+	color: #006e51;
+	font-weight: bold;
+	font-size: larger;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	vertical-align: bottom;
+}
+
+.mytheme .orderNOWborder_design {
+	background-color: #fcfcfc;
+	border: 3px solid #fcebeb;
+}
+
+.mytheme .titleFormLabel_design {
+	font-size: xx-large;
+	font-weight: bold;
+	color: #006e51;
+	text-align: left;
+	margin-left: 25px;
+	font-family: "Segoe UI Light";
+}
+
+.mytheme .secondtitleLabel_design {
+	font-size: x-large;
+	font-weight: bold;
+	color: #000000;
+	text-align: left;
+	font-family: "Segoe UI Light";
+}
+
+.mytheme .orderdetailslabel_design {
+	color: #006e51;
+	font-weight: bold;
+}
+
+.mytheme .standardtext_design {
+	font-family: "Segoe UI Light";
+}
+
+.mytheme .footer_design {
+	background-color: #006e51;
+	color: white;
+	padding-left: 20px;
+}
+
+.mytheme .sendbtn_design {
+	border: 2px solid #fcebeb;
+	background: #fcebeb;
+	color: #000000;
+	font-weight: bold;
+	font-size: larger;
+	font-family: "Segoe UI";
+}
+
+.mytheme .cancelbtn_design {
+	border: 2px solid #fcebeb;
+	background: white;
+	color: #000000;
+	font-weight: bold;
+	font-size: larger;
+	font-family: "Segoe UI";
+}
+
+.mytheme .ID_design {
+	font-weight: bold;
+	font-size: larger;
+	color: #000000;
+	text-align: center;
+}
+
+.mytheme .extraCalendar_design {
+	color: black;
+}
+
+.mytheme .defaultPageImage_design {
+	min-height: 150px;
+	max-height: 400px;
+	min-width: 150px;
+	max-width: 400px;
+	width: 100%;
+	height: 100%;
+	vertical-align: middle;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.mytheme .defaultPageContent_design1 {
+	width: 90%;
+	height: 100%;
+	text-align: justify;
+	background-color: #006e51;
+	color: white;
+	vertical-align: middle;
+	padding: 5px;
+	font-family: "Segoe UI";
+}
+
+.mytheme .defaultPageContent_design2 {
+	width: 90%;
+	height: 100%;
+	text-align: justify;
+	background-color: #fcebeb;
+	color: #006e51;
+	vertical-align: middle;
+	padding: 5px;
+	font-family: "Segoe UI";
+}

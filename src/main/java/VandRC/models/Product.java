@@ -16,21 +16,12 @@ public class Product {
     private int galleryID;
     private String description;
     private int workerID;
-    private Date dateModification;
-    private String warnings;
+    private Date modificationDate;
     private boolean status;
 
     public Product() {
     }
 
-    public Product(int productID, int galleryID, String description, int workerID, Date dateModification, String warnings) {
-        this.productID = productID;
-        this.galleryID = galleryID;
-        this.description = description;
-        this.workerID = workerID;
-        this.dateModification = dateModification;
-        this.warnings = warnings;
-    }
 
     public int getProductID() {
         return productID;
@@ -64,20 +55,12 @@ public class Product {
         this.workerID = workerID;
     }
 
-    public Date getDateModification() {
-        return dateModification;
+    public Date getModificationDate() {
+        return modificationDate;
     }
 
-    public void setDateModification(Date dateModification) {
-        this.dateModification = dateModification;
-    }
-
-    public String getWarnings() {
-        return warnings;
-    }
-
-    public void setWarnings(String warnings) {
-        this.warnings = warnings;
+    public void setModificationDate(Date modificationDate) {
+        this.modificationDate = modificationDate;
     }
 
     public boolean isStatus() {

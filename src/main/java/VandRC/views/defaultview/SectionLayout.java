@@ -8,25 +8,27 @@ import com.vaadin.ui.Label;
 /**
  * Created by Kamil on 22.04.2017.
  */
-public class SectionLayout extends HorizontalLayout{
+public class SectionLayout extends HorizontalLayout {
 
     private Label textField;
     private Image image;
 
-    public SectionLayout(String text, String imagePath, boolean isImageRight){
-        setSizeFull();
-        textField = new Label(text);
+    public SectionLayout(String imagePath, boolean isImageRight) {
+
+        textField = new Label("Wiemy, że pieczenie jest sztuką. Nawet z najlepszymi intencjami nie każy ma czas, siłę czy zdolności by stworzyć przepyszne ciasta i desery.\n" + "Być może nastał czas by zaufać naszym umiejętnościom i doświadczeniu przy nadchodzących specjalnych okazjach.");
+        textField.setSizeFull();
         image = new Image();
         image.setSource(new ExternalResource(imagePath));
+//        image.setHeight(100, Unit.PERCENTAGE);
+        image.setStyleName("defaultPageImage_design");
 
-        if(isImageRight){
+
+        if (isImageRight) {
             addComponents(textField, image);
-            setExpandRatio(textField, 0.5F);
-            setExpandRatio(image, 0.5F);
+            textField.setStyleName("defaultPageContent_design1");
         } else {
             addComponents(image, textField);
-            setExpandRatio(textField, 0.5F);
-            setExpandRatio(image, 0.5F);
+            textField.setStyleName("defaultPageContent_design2");
         }
     }
 }

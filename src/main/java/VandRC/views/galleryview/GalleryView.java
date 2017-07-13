@@ -29,7 +29,7 @@ public class GalleryView extends HorizontalLayout implements View {
     @PostConstruct
     void init() {
 //        GalleryItemController controller = new GalleryItemController();
-//        List<GalleryItem> galleryItemList = controller.getAll();
+//        List<Gallery> galleryItemList = controller.getAll();
 //
 //        galleryItemList.forEach(g->{
 //            image = new Image(g.getTitle());

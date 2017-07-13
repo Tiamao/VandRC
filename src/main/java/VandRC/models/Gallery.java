@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "gallery")
-public class GalleryItem {
+public class Gallery {
 
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO)
@@ -16,10 +16,10 @@ public class GalleryItem {
     private String photoPath;
     private boolean status;
 
-    public GalleryItem() {
+    public Gallery() {
     }
 
-    public GalleryItem(String title, String photoPath) {
+    public Gallery(String title, String photoPath) {
         this.title = title;
         this.photoPath = photoPath;
     }

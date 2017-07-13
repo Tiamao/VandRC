@@ -1,87 +1,75 @@
 package VandRC.views.menuview;
 
+import VandRC.controllers.CustomerController;
+import VandRC.controllers.OrderController;
+import VandRC.models.Allergen;
+import VandRC.models.Gallery;
 import VandRC.models.Product;
+import VandRC.views.makeOrder.MakePredefinitedOrder;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.ui.*;
-import com.vaadin.ui.themes.ValoTheme;
+
+import java.util.List;
 
 /**
  * Created by Mikołaj on 27.04.2017.
  */
 public class ProductSectionLayout extends HorizontalLayout {
 
-    Image image;
-    Label title;
-    Label description;
-    private String path = "https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe_images/recipe-image-legacy-id--1960_11.jpg?itok=U2w8rr7o";
-    private String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ante risus," +
-            " consectetur scelerisque ipsum sit amet, luctus dictum enim. Nullam cursus suscipit porttitor." +
-            " Maecenas ultricies tincidunt porta. Curabitur sagittis diam vitae suscipit finibus. " +
-            "Aliquam et nunc eget erat commodo tempor et non lacus. Sed feugiat, tortor sed dapibus sodales, " +
-            "tellus erat maximus metus, sed pharetra sapien dolor elementum sapien. Sed semper venenatis fermentum. " +
-            "Praesent ut ullamcorper tortor. Proin mattis id tellus non pharetra. Suspendisse ipsum nisi," +
-            " aliquet gravida lobortis id, facilisis id turpis. Cras ullamcorper nisl ut nisl pharetra suscipit. " +
-            "Interdum et malesuada fames ac ante ipsum primis in faucibus.";
-    ProductSectionLayout(){
+    private Image image;
+    private Label title;
+    private Label description;
+    private Button makePredefinitedOrder;
+
+    ProductSectionLayout(Product product, Gallery gallery, List<Allergen> allergens, OrderController controller, CustomerController customerController, int customerID){
         setSpacing(true);
+        makePredefinitedOrder = new Button("Zamów teraz!");
+        makePredefinitedOrder.setStyleName("orderbtn_design");
 
         image = new Image();
-        image.setSource(new ExternalResource(path)); // galleryid getPAth
+        image.setSource(new ExternalResource(gallery.getPhotoPath()));
         image.setHeight(250, Unit.PIXELS);
+        title = new Label(gallery.getTitle());
+        title.setStyleName("productTitle_design");
+       // title.setStyleName(ValoTheme.LABEL_BOLD);
 
-        title = new Label("asdadadsasdasda");
-        title.setStyleName(ValoTheme.LABEL_BOLD);
+        description = new Label(product.getDescription());
 
-        description = new Label(loremIpsum);
-//        description.setSizeFull();
+
         VerticalLayout descriptionLayout = new VerticalLayout(title,description);
         descriptionLayout.setComponentAlignment(title, Alignment.TOP_CENTER);
-        descriptionLayout.setWidth(750, Unit.PIXELS);
+        //descriptionLayout.setWidth(750, Unit.PIXELS);
+        descriptionLayout.setWidth(100, Unit.PERCENTAGE);
         descriptionLayout.setHeight(250, Unit.PIXELS);
+        descriptionLayout.addComponent(makePredefinitedOrder);
+        descriptionLayout.setComponentAlignment(makePredefinitedOrder, Alignment.MIDDLE_RIGHT);
 
         addComponents(image,descriptionLayout);
+        setExpandRatio(descriptionLayout,1.0F);
 
         descriptionLayout.setExpandRatio(description, 1.0F);
         setComponentAlignment(image, Alignment.MIDDLE_CENTER);
+        addStyleName("layout-with-border");
+
+        makePredefinitedOrder.addClickListener(clickEvent -> {
+//            getUI().getNavigator().navigateTo(MakePredefinitedOrder.VIEW_NAME);
+//            MakePredefinitedOrder mpo = new MakePredefinitedOrder();
+
+            Window window = new Window();
+            window.setWidth(60, Unit.PERCENTAGE);
+
+            window.setContent(new MakePredefinitedOrder(product, gallery, allergens, controller, customerController, customerID, window));
+
+            window.setHeight(80, Unit.PERCENTAGE);
+
+            window.center();
+            window.setDraggable(false);
+            window.setModal(true);
+            window.setResizable(false);
+            window.setClosable(true);
+            getUI().getUI().addWindow(window);
 
 
-        //SHOULD WORKS
-//        ProductController controller = new ProductController();
-//
-//        setSizeFull();
-//        image = new Image();
-//        image.setSource(new ExternalResource(controller.getImagePath(product.getProductID()))); // galleryid getPAth
-//        title = new Label(controller.getTitle(product.getProductID()));
-//        description = new Label(product.getDescription());
-//        VerticalLayout descriptionLayout = new VerticalLayout(title,description);
-//        descriptionLayout.setSizeFull();
-//
-//        addComponents(image,descriptionLayout);
-    }
-
-    ProductSectionLayout(Product product){
-        setSizeFull();
-        image = new Image();
-        image.setSource(new ExternalResource(path)); // galleryid getPAth
-        title = new Label("asdadadsasdasda");
-        description = new Label("11111111111111111111");
-        VerticalLayout descriptionLayout = new VerticalLayout(title,description);
-        descriptionLayout.setSizeFull();
-
-        addComponents(image,descriptionLayout);
-
-
-        //SHOULD WORKS
-//        ProductController controller = new ProductController();
-//
-//        setSizeFull();
-//        image = new Image();
-//        image.setSource(new ExternalResource(controller.getImagePath(product.getProductID()))); // galleryid getPAth
-//        title = new Label(controller.getTitle(product.getProductID()));
-//        description = new Label(product.getDescription());
-//        VerticalLayout descriptionLayout = new VerticalLayout(title,description);
-//        descriptionLayout.setSizeFull();
-//
-//        addComponents(image,descriptionLayout);
+        });
     }
 }

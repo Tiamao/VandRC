@@ -26,11 +26,24 @@ public class OrderDao {
     }
 
     public void makeOwnOrder(Order order){
-
+        entityManager.persist(order);
     }
 
     public List<Order> getOrdersOnDay(){
         return entityManager.createQuery("").getResultList();
     }
 
+    public List<Order> getOrdersForUser(int userID){
+        return entityManager.createQuery("from Order where customerID =:userID").setParameter("userID", userID).getResultList();
+    }
+
+    public List<Order> getOrdersByStatus(int statusID){
+        return entityManager.createQuery("from Order where statusID = :statusID").setParameter("statusID", statusID).getResultList();
+    }
+
+    public Order updateStatusOrder(int orderID, int orderStatus) {
+        Order order = entityManager.find(Order.class, orderID);
+        order.setStatusID(orderStatus);
+        return entityManager.merge(order);
+    }
 }

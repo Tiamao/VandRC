@@ -1,5 +1,6 @@
 package VandRC.views;
 
+import VandRC.controllers.CustomerController;
 import VandRC.views.contactview.ContactView;
 import VandRC.views.defaultview.DefaultView;
 import VandRC.views.galleryview.GalleryView;
@@ -11,10 +12,12 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewDisplay;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.annotation.SpringViewDisplay;
 import com.vaadin.ui.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Theme("mytheme")
 @SpringUI
@@ -32,7 +35,7 @@ public class MainUI extends UI implements ViewDisplay {
     //+++++++++++++++++++++++++++++++++++++
     private VerticalLayout loginLayout;
     private TextField email;
-    private TextField password;
+    private PasswordField password;
     private Button loginBtn;
     private Button registerBtn;
     //++++++++++++++++++
@@ -40,23 +43,80 @@ public class MainUI extends UI implements ViewDisplay {
 
     //+++++++++
     private TextField nameReg;
-    private TextField suernameReg;
+    private TextField surnameReg;
     private TextField mailReg;
-    private TextField passwordReg;
-    private TextField repeatPasswordReg;
-    private Button registeBtnReg;
+    private PasswordField passwordReg;
+    private PasswordField repeatPasswordReg;
+    private Button registerBtnReg;
+    private Button logout;
+
+    @Autowired
+    private CustomerController customerController;
 
     @Override
     protected void init(VaadinRequest request) {
         initt();
 
         loginBtn.addClickListener(e -> {
-            loginLayout.setVisible(false);
-            initLoggedMenuBar(menuBar.getItems().get(menuBar.getItems().size() - 1));
-            loginLayout.removeAllComponents();
-            Label hello = new Label("Witaj, Grażyna!");
-            loginLayout.addComponent(hello);
-            loginLayout.setComponentAlignment(hello, Alignment.TOP_RIGHT);
+//            String customerPass = customerController.getCustomerPassword(email.getValue());
+
+            String pass = null;
+            if (email.getValue().equals("")) {
+                //email.setStyleName(ValoTheme.NOTIFICATION_ERROR);
+                email.setStyleName("textfieldERROR_design");
+            } else {
+
+                try{
+                    pass = customerController.getCustomerPassword(email.getValue());
+                } catch (Exception ex){
+                    //password.setStyleName(ValoTheme.NOTIFICATION_ERROR);
+                    password.setStyleName("textfieldERROR_design");
+                }
+
+                if (password.getValue().equals(pass)) {
+                    VaadinSession.getCurrent().setAttribute("user", email.getValue());
+
+                    initLoggedMenuBar(menuBar.getItems().get(menuBar.getItems().size() - 1));
+                    loginLayout.removeAllComponents();
+                    String name = customerController.getNameByMail(email.getValue());
+                    Label hello = new Label("Witaj, " + name + "!");
+                    logout = new Button("Wyloguj");
+                    logout.setStyleName("loginbtn_design");
+                    hello.addStyleName("helloLabel_design");
+                    loginLayout.addComponents(hello, logout);
+                    loginLayout.setComponentAlignment(hello, Alignment.MIDDLE_CENTER);
+                    loginLayout.setComponentAlignment(logout, Alignment.MIDDLE_CENTER);
+                } else {
+                    //email.setStyleName(ValoTheme.NOTIFICATION_ERROR);
+                    //password.setStyleName(ValoTheme.NOTIFICATION_ERROR);
+                    email.setStyleName("textfieldERROR_design");
+                    password.setStyleName("textfieldERROR_design");
+                }
+            }
+
+
+
+
+
+//            if (customerPass.equals("") || customerPass == null) {
+//                //TODO error
+//            } else if (password.getValue().equals(customerPass)) {
+//                VaadinSession.getCurrent().setAttribute("user", email.getValue());
+//                String name = customerController.getNameByMail(email.getValue());
+//
+////                loginLayout.setVisible(false);
+//                initLoggedMenuBar(menuBar.getItems().get(menuBar.getItems().size() - 1));
+//                loginLayout.removeAllComponents();
+//                Label hello = new Label("Witaj, " + name + "!");
+//                logout = new Button("Wyloguj");
+//                logout.setStyleName("loginbtn_design");
+//                hello.addStyleName("helloLabel_design");
+//                loginLayout.addComponents(hello, logout);
+//                loginLayout.setComponentAlignment(hello, Alignment.MIDDLE_CENTER);
+//                loginLayout.setComponentAlignment(logout, Alignment.MIDDLE_CENTER);
+//            } else {
+//                //TODO error
+//            }
         });
     }
 
@@ -84,8 +144,8 @@ public class MainUI extends UI implements ViewDisplay {
 
     private void initLoginLayout() {
         Image logo = new Image();
+        logo.addStyleName("logo_design");
         logo.setSource(new ExternalResource("http://vanillaandraspberrycakes.com/wp-content/uploads/2017/02/cakes_circleXS.png"));
-        logo.setHeight("190px");
         loginLayout = new VerticalLayout();
         loginLayout.setSizeFull();
         loginLayout.setSpacing(true);
@@ -94,16 +154,25 @@ public class MainUI extends UI implements ViewDisplay {
         buttonsLayout.setSpacing(true);
 
         email = new TextField();
-        password = new TextField();
+        email.setStyleName("textfield_design");
+        email.setInputPrompt("Adres e-mail");
+        password = new PasswordField();
+        password.setStyleName("textfield_design");
+        password.setInputPrompt("hasełko");
 
         registerBtn = new Button("Rejestracja");
+        registerBtn.setStyleName("registrybtn_design");
         loginBtn = new Button("Login");
+        loginBtn.setStyleName("loginbtn_design");
 
         buttonsLayout.addComponents(registerBtn, loginBtn);
 
         GridLayout headerHeader = new GridLayout(3, 1);
+        headerHeader.addStyleName("header_design");
         headerHeader.setSizeFull();
+        headerHeader.setHeight("190px");
         headerHeader.addComponent(logo, 1, 0);
+
         headerHeader.addComponent(loginLayout, 2, 0);
 
         loginLayout.addComponents(email, password, buttonsLayout);
@@ -117,48 +186,61 @@ public class MainUI extends UI implements ViewDisplay {
 
         registerBtn.addClickListener(e -> {
 
-            Window window = new Window("Register");
+            Window window = new Window("Rejestracja");
             window.setWidth(400.0f, Unit.PIXELS);
             VerticalLayout regiView = new VerticalLayout();
 
             window.setContent(regiView);
 
             nameReg = new TextField("Imie");
-            suernameReg = new TextField("Nazwisko");
+            surnameReg = new TextField("Nazwisko");
             mailReg = new TextField("Adres e-mail");
-            passwordReg = new TextField("Hasło");
-            repeatPasswordReg = new TextField("Powtórz hasło");
-            registeBtnReg = new Button("Załóż konto");
+            passwordReg = new PasswordField("Hasło");
+            repeatPasswordReg = new PasswordField("Powtórz hasło");
+            registerBtnReg = new Button("Załóż konto");
+            registerBtnReg.setStyleName("loginbtns_design");
 
             regiView.addComponent(nameReg);
-            regiView.addComponent(suernameReg);
+            regiView.addComponent(surnameReg);
             regiView.addComponent(mailReg);
             regiView.addComponent(passwordReg);
             regiView.addComponent(repeatPasswordReg);
-            regiView.addComponent(registeBtnReg);
+            regiView.addComponent(registerBtnReg);
 
             regiView.setMargin(new MarginInfo(true));
             regiView.setSpacing(true);
             regiView.setComponentAlignment(nameReg, Alignment.MIDDLE_CENTER);
-            regiView.setComponentAlignment(suernameReg, Alignment.MIDDLE_CENTER);
+            regiView.setComponentAlignment(surnameReg, Alignment.MIDDLE_CENTER);
             regiView.setComponentAlignment(mailReg, Alignment.MIDDLE_CENTER);
             regiView.setComponentAlignment(passwordReg, Alignment.MIDDLE_CENTER);
             regiView.setComponentAlignment(repeatPasswordReg, Alignment.MIDDLE_CENTER);
-            regiView.setComponentAlignment(registeBtnReg, Alignment.MIDDLE_CENTER);
+            regiView.setComponentAlignment(registerBtnReg, Alignment.MIDDLE_CENTER);
+
+            registerBtnReg.addClickListener(click -> {
+
+                if (customerController.mailExists(mailReg.getValue())) {
+                    //TODO unlucky, inny nick
+                } else if (passwordReg.getValue().equals(repeatPasswordReg.getValue())) {
+                    customerController.newCustomer(nameReg.getValue(), surnameReg.getValue(), mailReg.getValue(), passwordReg.getValue());
+                    window.close();
+                } else {
+                    //TODO unlucky
+                }
+
+            });
 
             window.center();
             window.setDraggable(false);
             window.setModal(true);
             window.setResizable(false);
             getUI().getUI().addWindow(window);
-
         });
     }
 
     private void initVisitorMenuBar() {
         menuBar = new MenuBar();
         menuBar.setWidth(100, Unit.PERCENTAGE);
-        menuBar.setStyleName("backgroundMenu");
+        menuBar.setStyleName("menustackbar_design");
         header.addComponent(menuBar);
         header.setComponentAlignment(menuBar, Alignment.MIDDLE_CENTER);
 
@@ -173,8 +255,6 @@ public class MainUI extends UI implements ViewDisplay {
 
         MenuBar.MenuItem contactItem = menuBar.addItem("Kontakt", null, null);
         contactItem.setCommand(e -> getUI().getNavigator().navigateTo(ContactView.VIEW_NAME));
-
-
     }
 
     private void initLoggedMenuBar(MenuBar.MenuItem menuItem) {
@@ -185,9 +265,12 @@ public class MainUI extends UI implements ViewDisplay {
     }
 
     private void initFooterLayout() {
-        footer.addComponent(new Label("asdasdasd"));
-        footer.addComponent(new Label("dfghfghfgh"));
-        footer.addComponent(new Label("24562542"));
+        footer.addComponent(new Label("cakes. by Vanilla and Raspberry Cakes"));
+        footer.addComponent(new Label("Poznań 2017"));
+        footer.addComponent(new Label("Kamil Szulc, Adam Tokarczyk, Mikołaj Owczarczak"));
+        footer.setWidth(100, Unit.PERCENTAGE);
+        footer.setHeight(100, Unit.PERCENTAGE);
+        footer.setStyleName("footer_design");
     }
 
     @Override

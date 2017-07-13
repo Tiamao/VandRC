@@ -32,6 +32,7 @@ public class ContactView extends VerticalLayout implements View {
         root = new VerticalLayout();
         root.setSizeFull();
         title = new Label("Kontakt");
+        title.setValue("titleFormLabel_design");
 
 //        GoogleMap map = new GoogleMap("apiKey", null, "english");
 //        map.setSizeFull();
@@ -44,9 +45,9 @@ public class ContactView extends VerticalLayout implements View {
 //        map.setMaxZoom(16);
 //        map.setMinZoom(4);
 
-                address = new Label("asdasdasdasdasdasdaadres");
-        phoneNumber = new Label("asdasdasdasdasdasdanumer");
-        email = new Label("asdasdasdasdasdasdamail");
+                address = new Label("ul. E. Gierczak");
+        phoneNumber = new Label("123456789");
+        email = new Label("mail@mail.com");
         dataLayout = new VerticalLayout();
         dataLayout.setSizeFull();
 

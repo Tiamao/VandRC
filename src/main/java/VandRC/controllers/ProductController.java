@@ -21,7 +21,7 @@ public class ProductController {
     @Autowired
     private ProductDao productDao;
 
-    @RequestMapping(value="/products", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value="/json/products", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public List<Product> getAll() {
         return productDao.getAll();

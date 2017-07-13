@@ -1,5 +1,6 @@
 package VandRC.workermodule;
 
+import VandRC.workermodule.orders.OrderView;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.ui.*;
 
@@ -41,6 +42,7 @@ public class WorkerLayout extends VerticalLayout {
 
         item.setCommand(e-> content.setContent(new Label("asdasdasdasd")));
         calendar.setCommand(e-> content.setContent(new CalendarLayout()));
+        orders.setCommand(e-> content.setContent(new OrderView()));
 
         header.addComponent(logo);
         header.addComponent(menuBar);

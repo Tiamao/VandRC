@@ -17,6 +17,7 @@ public class WorkerDao {
     private EntityManager entityManager;
 
     public String getWorkerPassword(String workerEmail){
-        return "";
+        Worker worker = (Worker) entityManager.createQuery("from Worker where mail =:workerEmail").setParameter("workerEmail", workerEmail).getSingleResult();
+        return worker.getPassword();
     }
 }

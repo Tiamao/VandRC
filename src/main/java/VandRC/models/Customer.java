@@ -16,18 +16,9 @@ public class Customer {
     private String surname;
     private String mail;
     private String password;
-    private double discount;
+    private boolean status;
 
     public Customer() {
-    }
-
-    public Customer(int customerID, String name, String surname, String mail, String password, double discount) {
-        this.customerID = customerID;
-        this.name = name;
-        this.surname = surname;
-        this.mail = mail;
-        this.password = password;
-        this.discount = discount;
     }
 
     public int getCustomerID() {
@@ -70,11 +61,11 @@ public class Customer {
         this.password = password;
     }
 
-    public double getDiscount() {
-        return discount;
+    public boolean isStatus() {
+        return status;
     }
 
-    public void setDiscount(double discount) {
-        this.discount = discount;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }
